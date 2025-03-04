@@ -1,9 +1,8 @@
 import { create } from "zustand";
 import axios from "axios";
+import clientAxios from "../config/axios";
 
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:3001/auth" : "/api/auth";
-
-axios.defaults.withCredentials = true;
+clientAxios.defaults.withCredentials = true;
 
 export const useAuthStore = create((set) => ({
 	
@@ -19,7 +18,7 @@ export const useAuthStore = create((set) => ({
 		 identification, email, password, payment_method, address, cell_phone_number) => {
 		set({ isLoading: true, error: null });
 		try {
-			const response = await axios.post(`${API_URL}/register`, { first_name, second_name, first_last_name, second_last_name,
+			const response = await clientAxios.post(`/auth/register`, { first_name, second_name, first_last_name, second_last_name,
 				identification, email, password, payment_method, address, cell_phone_number });
 			set({ user: response.data.user, isAuthenticated: true, isLoading: false });
 		} catch (error) {
@@ -31,7 +30,7 @@ export const useAuthStore = create((set) => ({
 	login: async (email, password) => {
 		set({ isLoading: true, error: null });
 		try {
-			const response = await axios.post(`${API_URL}/login`, { email, password });
+			const response = await clientAxios.post(`/auth/login`, { email, password });
 			const token = response.data.token;
 			const expiresIn = 20 * 60 * 1000; //20 minutes for testing
             const expirationTime = Date.now() + expiresIn;
@@ -42,7 +41,8 @@ export const useAuthStore = create((set) => ({
 			localStorage.setItem('role', response.data.role);
 
 
-			axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+			clientAxios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
 			set({
 				isAuthenticated: true,
 				user: response.data.user,

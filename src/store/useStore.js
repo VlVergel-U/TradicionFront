@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import axios from 'axios';
+import clientAxios from '../config/axios';
 
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:3001" : "";
+const API_URL = import.meta.env.VITE_BACKEND_URL
 
 export const useStore = create((set, get) => ({
 
@@ -32,10 +33,10 @@ export const useStore = create((set, get) => ({
   
     set({ loading: true });
     try {
-      let url = `http://localhost:3001/tradicion/product`;
+      let url = `${API_URL}/tradicion/product`;
   
       if (search) {
-        url = `http://localhost:3001/tradicion/productUnique/${encodeURIComponent(search)}`;
+        url = `${API_URL}/tradicion/productUnique/${encodeURIComponent(search)}`;
       } else {
         const queryParams = new URLSearchParams({
           limit: 12,
@@ -66,7 +67,7 @@ export const useStore = create((set, get) => ({
   createProduct: async (name, description, price, stock, img, categoryName) => {
     try {
       set({ isLoading: true, error: null });
-      const response = await axios.post(`${API_URL}/tradicion/product`, {
+      const response = await clientAxios.post(`/tradicion/product`, {
         name, description, price, stock, img, categoryName
       });
       console.log("Producto creado:", response.data);
@@ -82,7 +83,7 @@ export const useStore = create((set, get) => ({
   updateProduct: async (id, name, description, price, stock, img, categoryName) => {
     try {
         set({ isLoading: true, error: null });
-        const response = await axios.put(`${API_URL}/tradicion/product/${id}`, {
+        const response = await clientAxios.put(`/tradicion/product/${id}`, {
             name, description, price, stock, img, categoryName
         });
         console.log("Product updated:", response.data);
@@ -99,7 +100,7 @@ export const useStore = create((set, get) => ({
   deleteProduct: async (id) => {
     try {
       set({ isLoading: true, error: null });
-      const response = await axios.delete(`${API_URL}/tradicion/product/${id}`);
+      const response = await clientAxios.delete(`/tradicion/product/${id}`);
       
       console.log("Producto eliminado:", response.data);
 
@@ -118,7 +119,7 @@ export const useStore = create((set, get) => ({
 
   changeAvailable: async (id, stock) => {
     try {
-      const response = await axios.put(`${API_URL}/tradicion/product/${id}`, {stock});
+      const response = await clientAxios.put(`/tradicion/product/${id}`, {stock});
       set({ isLoading: true, error: null });
       console.log("Product updated:", response.data);
       await get().fetchProducts(); 
@@ -185,7 +186,7 @@ export const useStore = create((set, get) => ({
   sendOrder: async (emailUser, subtotalAllProducts, products) => {
     try {
       set({ isLoading: true, error: null });
-      const response = await axios.post(`${API_URL}/tradicion/order`, {
+      const response = await clientAxios.post(`/tradicion/order`, {
         emailUser: emailUser,
         subtotalAllProducts: parseFloat(subtotalAllProducts),
         products: products,
