@@ -13,7 +13,6 @@ const Order = () => {
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
-  const email = localStorage.getItem("email");
 
   const handleChange = async (orderId, status) => {
     try {
@@ -25,8 +24,7 @@ const Order = () => {
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
+        }
       };
   
       const body = {
@@ -62,8 +60,7 @@ const Order = () => {
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
+        }
       };
       
       const response = await clientAxios.get("/tradicion/order", config);
@@ -83,25 +80,14 @@ const Order = () => {
     setLoading(true);
   
     try {
-      if (!email) {
-        console.error("Email no encontrado");
-        return;
-      }
-  
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        console.error("Formato de email inválido");
-        return;
-      }
-  
+     
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
+        }
       };
   
-      const response = await clientAxios.get(`/tradicion/orderUnique/${encodeURIComponent(email)}`, config);
+      const response = await clientAxios.get(`/tradicion/orderUnique/`, config);
   
       if (response.data.success) {
         setOrders(response.data.orders);
