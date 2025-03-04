@@ -25,8 +25,7 @@ const Order = () => {
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
+        }
       };
   
       const body = {
@@ -62,8 +61,7 @@ const Order = () => {
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
+        }
       };
       
       const response = await clientAxios.get("/tradicion/order", config);
@@ -97,8 +95,7 @@ const Order = () => {
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
+        }
       };
   
       const response = await clientAxios.get(`/tradicion/orderUnique/${encodeURIComponent(email)}`, config);

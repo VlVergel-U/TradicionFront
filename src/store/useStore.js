@@ -1,8 +1,6 @@
 import { create } from 'zustand';
-import axios from 'axios';
-import clientAxios from '../config/axios';
 
-const API_URL = import.meta.env.VITE_BACKEND_URL
+import clientAxios from '../config/axios';
 
 export const useStore = create((set, get) => ({
 
@@ -33,10 +31,10 @@ export const useStore = create((set, get) => ({
   
     set({ loading: true });
     try {
-      let url = `${API_URL}/tradicion/product`;
+      let url = `/tradicion/product`;
   
       if (search) {
-        url = `${API_URL}/tradicion/productUnique/${encodeURIComponent(search)}`;
+        url = `/tradicion/productUnique/${encodeURIComponent(search)}`;
       } else {
         const queryParams = new URLSearchParams({
           limit: 12,
@@ -49,7 +47,7 @@ export const useStore = create((set, get) => ({
       }
   
       console.log("Fetching from:", url);
-      const response = await axios.get(url, { withCredentials: false });
+      const response = await clientAxios.get(url);
       console.log("Fetched products:", response.data);
   
       set({
