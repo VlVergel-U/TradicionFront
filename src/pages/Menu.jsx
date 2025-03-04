@@ -70,6 +70,15 @@ const Menu = () => {
 
   const handleAddToCartClick = (event, product) => {
     event.stopPropagation();
+    if (product.stock === 0) {
+      Swal.fire({
+        title: "No hay stock disponible",
+        text: "Este producto está agotado",
+        icon: "warning",
+        confirmButtonText: "Aceptar",
+      });
+      return;
+    }
     addToCart(product);
   };
 
