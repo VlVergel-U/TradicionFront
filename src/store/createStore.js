@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import clientAxios from "../config/axios";
 
-clientAxios.defaults.withCredentials = true;
 
 export const createStore = create((set) => ({
 	

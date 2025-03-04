@@ -1,8 +1,5 @@
 import { create } from "zustand";
-import axios from "axios";
 import clientAxios from "../config/axios";
-
-clientAxios.defaults.withCredentials = true;
 
 export const useAuthStore = create((set) => ({
 	
@@ -85,7 +82,6 @@ export const useAuthStore = create((set) => ({
 					set({ isAuthenticated: false, token: null });
 					window.location.reload();
 				} else {
-					axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 					set({ isAuthenticated: true, token });
 				}
 			} else {
