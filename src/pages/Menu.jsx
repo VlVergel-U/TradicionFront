@@ -22,13 +22,11 @@ const Menu = () => {
     hasMore,
     loading,
     setSearch,
-    setSortOrder,
     setPage,
     fetchProducts,
     addToCart,
     updateCartQuantity,
     deleteProduct,
-    updateProduct
 
   } = useStore();
 
@@ -58,10 +56,6 @@ const Menu = () => {
     return () => container.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  const handleSortChange = (e) => {
-    setSortOrder(e.target.value);
-    setPage(1);
-  };
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
@@ -127,15 +121,6 @@ const handleDeleteProduct = async (event, id) => {
           onChange={handleSearchChange}
           className="p-3 text-sm rounded-xl border border-gray-300 shadow-md text-gray-800 w-full sm:w-1/2 bg-white focus:outline-none focus:ring-2 focus:ring-amber-300"
         />
-        <select
-          value={sortOrder}
-          onChange={handleSortChange}
-          className="text-sm p-3 rounded-xl border border-gray-300 shadow-md text-gray-800 w-full sm:w-auto bg-white focus:outline-none focus:ring-2 focus:ring-amber-400"
-        >
-          <option value="">Ordenar</option>
-          <option value="asc">Precio más bajo a más alto</option>
-          <option value="desc">Precio más alto a más bajo</option>
-        </select>
       </div>
 
       <h1 className="text-2xl font-bold mb-4 font-amarante-regular">Menú</h1>
@@ -258,7 +243,6 @@ const handleDeleteProduct = async (event, id) => {
             setSelectedProduct(null);
           }}
           productToEdit={selectedProduct}
-          onUpdate={updateProduct} 
         />
       )}
 

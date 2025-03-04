@@ -34,8 +34,14 @@ const handleOrder = async (e) => {
   
   try {
     await sendOrder(emailUser, subtotal, products);
-    clearCart(); 
-          Swal.fire("Orden enviada!", "", "success");
+    const role = localStorage.getItem('role')
+    if(role == 'administrative' || role == 'seller'){
+        Swal.fire("No estás autorizado para realizar pedidos", "", "danger");
+    } else {
+      clearCart(); 
+      Swal.fire("Orden enviada!", "", "success");
+    }
+
     
   } catch (err) {
     console.error("Error al enviar la orden:", err);

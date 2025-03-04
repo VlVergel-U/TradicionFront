@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:4026/auth" : "/api/auth";
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:3001/auth" : "/api/auth";
 
 axios.defaults.withCredentials = true;
 
@@ -64,7 +64,7 @@ export const useAuthStore = create((set) => ({
 			localStorage.removeItem("token");
 			localStorage.removeItem("tokenExpiration");
 			localStorage.removeItem('email');
-			set({ user: null, isAuthenticated: false, isLoading: false });
+			set({ user: null, isAuthenticated: false, isLoading: false, token:null });
 			navigate("/login");
 		} catch (error) {
 			set({ error: "Error logging out", isLoading: false });

@@ -29,6 +29,12 @@ const CreateUser = () => {
 
   const handleCreate = async (e) => {
     e.preventDefault();
+    
+    if (password.length < 12) {
+      Swal.fire("La contraseña debe tener al menos 12 caracteres", "", "error");
+      return;
+    }
+
     try {
       await createUser(firstName, secondName, firstLastName, secondLastName, identification, email, password, role, appointment);
           Swal.fire("Usuario creado con éxito!", "", "success");

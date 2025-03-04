@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:4026/api" : "/api/auth";
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:3001/api" : "/api/auth";
 
 axios.defaults.withCredentials = true;
 
@@ -17,7 +17,7 @@ export const createStore = create((set) => ({
 		identification, email, password, role, appointment) => {
 	   set({ isLoading: true, error: null });
 	   try {
-		   const response = await axios.post(`/user`, { first_name, second_name, first_last_name, second_last_name,
+		   const response = await axios.post(`${API_URL}/user`, { first_name, second_name, first_last_name, second_last_name,
 			identification, email, password, role, appointment });
 		   set({ user: response.data.user, isAuthenticated: true, isLoading: false });
 	   } catch (error) {

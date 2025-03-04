@@ -11,13 +11,50 @@ import clientAxios from "../config/axios";
 const Order = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
+  const email = localStorage.getItem("email");
+
+  const handleChange = async (orderId, status) => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        return;
+      }
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      };
+  
+      const body = {
+        orderId: orderId,
+        status: status,
+      };
+  
+      const response = await clientAxios.put("/tradicion/orderChangeStatus", body, config);
+  
+      if (response.data.success) {
+        setOrders((prevOrders) =>
+          prevOrders.map((order) =>
+            order.id === orderId ? { ...order, status } : order
+          )
+        );
+        console.log("Estado actualizado exitosamente");
+      } else {
+        console.error("Error al cambiar el estado del pedido");
+      }
+    } catch (error) {
+      console.error("Error al cambiar el estado del pedido:", error);
+    }
+  };
+  
 
   const fetchOrders = async () => {
     setLoading(true);
     try {
-      console.log(localStorage.getItem("token"));
-
-      const token = localStorage.getItem("token");
       if (!token) {
         console.error("Token no encontrado");
         return;
@@ -28,12 +65,46 @@ const Order = () => {
         },
         withCredentials: true,
       };
-      console.log("MIRA AQUI"+config)
       
-      const response = await  clientAxios.get( "/tradicion/order", config);
+      const response = await clientAxios.get("/tradicion/order", config);
+
+      if (response.data.success) {
+        setOrders(response.data.orders);
+        console.log(response.data.orders);
+      }
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getOrder = async () => {
+    setLoading(true);
+  
+    try {
+      if (!email) {
+        console.error("Email no encontrado");
+        return;
+      }
+  
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        console.error("Formato de email inválido");
+        return;
+      }
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      };
+  
+      const response = await clientAxios.get(`/tradicion/orderUnique/${encodeURIComponent(email)}`, config);
   
       if (response.data.success) {
-        setOrders(response.data.orders); 
+        setOrders(response.data.orders);
         console.log(response.data.orders);
       }
     } catch (error) {
@@ -45,8 +116,14 @@ const Order = () => {
   
 
   useEffect(() => {
-    fetchOrders();
-  }, []);
+    if (role === "administrative" || role === "seller") {
+      fetchOrders();
+    }
+    if (role === "customer") {
+      getOrder();
+    }
+  }, [role]);
+  
 
   return (
     <>
@@ -70,7 +147,7 @@ const Order = () => {
                 {orders.map((order) => (
                   <div
                     key={order.id}
-                    className="bg-gray-800 rounded-lg p-4 shadow-lg flex justify-between items-center"
+                    className="rounded-lg p-4 shadow-lg flex justify-between items-center"
                   >
                     <div>
                       <h2 className="text-lg font-semibold">
@@ -80,7 +157,7 @@ const Order = () => {
                         <strong>Date:</strong> {new Date(order.createdAt).toLocaleDateString()}
                       </p>
                       <p className="text-gray-400">
-                        <strong>Total:</strong> ₹{order.total_price.toFixed(2)}
+                        <strong>Total:</strong> ${order.total_price.toFixed(2)}
                       </p>
                       <p className="text-gray-400">
                         <strong>Status:</strong> {order.status}
@@ -97,16 +174,30 @@ const Order = () => {
                           >
                             <p>{product.product.name}</p>
                             <p>
-                              ₹{product.unit_price.toFixed(2)} x {product.quantity} = ₹{product.subtotal.toFixed(2)}
+                              ${product.unit_price.toFixed(2)} x {product.quantity} = ${product.subtotal.toFixed(2)}
                             </p>
                           </div>
                         ))}
                       </div>
                     </div>
-                    <Download
-                      className="text-blue-500 cursor-pointer"
-                      onClick={() => generateInvoicePDF(order)}
-                    />
+
+                    <div className="flex items-center space-x-4">
+                    {(role === "administrative" || role === "seller") && (
+                      <select
+                        value={order.status}
+                        onChange={(e) => handleChange(order.id, e.target.value)}
+                        className="p-2 border rounded"
+                      >
+                        <option value="pending">Pendiente</option>
+                        <option value="sent">Enviado</option>
+                        <option value="delivered">Entregado</option>
+                      </select>
+                      )}
+                      <Download
+                        className="text-amber-500 cursor-pointer"
+                        onClick={() => generateInvoicePDF(order)}
+                      />
+                    </div>
                   </div>
                 ))}
               </motion.div>

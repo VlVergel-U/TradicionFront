@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:4026" : "";
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:3001" : "";
 
 export const useStore = create((set, get) => ({
 
@@ -32,10 +32,10 @@ export const useStore = create((set, get) => ({
   
     set({ loading: true });
     try {
-      let url = `http://localhost:4026/tradicion/product`;
+      let url = `http://localhost:3001/tradicion/product`;
   
       if (search) {
-        url = `http://localhost:4026/tradicion/productUnique/${encodeURIComponent(search)}`;
+        url = `http://localhost:3001/tradicion/productUnique/${encodeURIComponent(search)}`;
       } else {
         const queryParams = new URLSearchParams({
           limit: 12,
@@ -81,18 +81,20 @@ export const useStore = create((set, get) => ({
   
   updateProduct: async (id, name, description, price, stock, img, categoryName) => {
     try {
-      const response = await axios.put(`${API_URL}/tradicion/product/${id}`, {name, description, price, stock, img, categoryName});
-      set({ isLoading: true, error: null });
-      console.log("Product updated:", response.data);
-      await get().fetchProducts(); 
-      set({ loading: false });
-
+        set({ isLoading: true, error: null });
+        const response = await axios.put(`${API_URL}/tradicion/product/${id}`, {
+            name, description, price, stock, img, categoryName
+        });
+        console.log("Product updated:", response.data);
+        await get().fetchProducts(); 
     } catch (error) {
-      console.error("Error updating product:", error);
-			set({ error: error.response.data.message || "Error modificando producto", isLoading: false });
-      setTimeout(() => set({ error: null }), 3000);
+        console.error("Error updating product:", error);
+        set({ error: error.response.data.message || "Error modificando producto", isLoading: false });
+        setTimeout(() => set({ error: null }), 3000);
+    } finally {
+        set({ isLoading: false });
     }
-  },
+},
 
   deleteProduct: async (id) => {
     try {

@@ -5,8 +5,8 @@ import { X } from "lucide-react";
 import useStore from "../store/useStore";
 import { Loader } from "lucide-react";
 
-const CreateProductModal = ({ isOpen, onClose, productToEdit, onUpdate }) => {
-    const { createProduct, isLoading, error } = useStore();
+const CreateProductModal = ({ isOpen, onClose, productToEdit}) => {
+    const { createProduct, isLoading, error, updateProduct } = useStore();
     const [name, setName] = useState(productToEdit ? productToEdit.name : "");
     const [price, setPrice] = useState(productToEdit ? productToEdit.price : "");
     const [description, setDescription] = useState(productToEdit ? productToEdit.description : "");
@@ -21,21 +21,21 @@ const CreateProductModal = ({ isOpen, onClose, productToEdit, onUpdate }) => {
       e.preventDefault();
       if (!validateForm()) return;
       try {
-        if (productToEdit) {
-          await onUpdate({ ...productToEdit, name, description, price, stock: Number(stock), img, category });
-        } else {
-          await createProduct(name, description, price, Number(stock), img, category);
-        }
-        onClose();
+          if (productToEdit) {
+              await updateProduct(productToEdit.id, name, description, price, Number(stock), img, category);
+          } else {
+              await createProduct(name, description, price, Number(stock), img, category);
+          }
+          onClose();
       } catch (error) {
-        console.log(error);
+          console.log(error);
       }
-    };
+  };
   
     const validateForm = () => {
       let newErrors = {};
       if (!name.trim()) newErrors.name = "El nombre es obligatorio.";
-      if (!price.trim() || isNaN(price) || Number(price) <= 0)
+      if (!price || isNaN(price) || Number(price) <= 0)
         newErrors.price = "El precio debe ser un número válido.";
       if (!description.trim()) newErrors.description = "La descripción es obligatoria.";
       if (!category) newErrors.category = "Selecciona una categoría.";
@@ -151,7 +151,7 @@ const CreateProductModal = ({ isOpen, onClose, productToEdit, onUpdate }) => {
               <button
                 disabled={isLoading}
                 type="submit"
-                className="w-full bg-amber-500 text-white py-2 rounded-lg hover:bg-green-700 transition"
+                className="w-full bg-amber-500 text-white py-2 rounded-lg hover:bg-amber-700 transition"
               >
                 {isLoading ? (
                   <Loader className='w-6 h-6 animate-spin mx-auto' />
