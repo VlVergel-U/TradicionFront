@@ -1,0 +1,21 @@
+.link {
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  .link::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+  
+  .link:hover::after,
+  .link.active::after {
+    width: 100%;
+    left: 0;
+  }
