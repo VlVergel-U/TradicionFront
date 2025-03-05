@@ -47,7 +47,7 @@ const CreateUser = () => {
   return (
     <>
 <Header></Header>
-    <div className="flex h-screen">
+    <div className="flex h-screen font-bona-nova-regular">
       <Sidebar></Sidebar>
   <div className="bg-white rounded-lg max-w-md z-10 min-h-[400px] w-auto p-10">
     
@@ -155,7 +155,7 @@ const CreateUser = () => {
       <button 
         disabled={isLoading}
         type="submit" 
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
+        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-800 hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
       >
         {isLoading ? (
           <Loader className='w-6 h-6 animate-spin mx-auto' />

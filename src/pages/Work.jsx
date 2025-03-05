@@ -22,7 +22,7 @@ const Work = () => {
         </div>
       </div>
 
-      <div className="p-30">
+      <div className="p-30 font-bona-nova-regular">
         <p>
           Si amas la gastronomía, disfrutas el buen café y trabajas con pasión, en <strong>Tradición</strong> estamos buscando talentos como tú. Queremos sumar a nuestro equipo a personas creativas, comprometidas y con actitud de servicio para diferentes áreas, como:
         </p>
@@ -41,7 +41,7 @@ const Work = () => {
         <div className="flex justify-center mt-6">
           <button
             onClick={() => window.location.href = 'mailto:tradicionsas@outlook.com'}
-            className="bg-[#3D0F09] text-white p-2 rounded-md hover:bg-[#5A0F09] transition duration-300 font-black cursor-pointer"
+            className="bg-[#3D0F09] text-white p-2 rounded-md hover:bg-[#5A0F09] transition duration-300 font-semibold cursor-pointer"
           >
             Enviar un correo
           </button>

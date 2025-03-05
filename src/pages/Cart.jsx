@@ -52,7 +52,7 @@ const handleOrder = async (e) => {
   return (
     <>
     <Header></Header>
-    <div className="flex h-screen">
+    <div className="flex h-screen font-bona-nova-regular">
       <Sidebar></Sidebar>
     <div className="flex-1 p-12 mx-10 z-10 overflow-y-auto h-screen" id="Content">
         <h1 className="text-2xl font-bold mb-4 font-amarante-regular">Carrito</h1>
