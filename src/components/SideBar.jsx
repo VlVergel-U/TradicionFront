@@ -24,7 +24,7 @@ const Sidebar = () => {
     ...(role === 'customer' || role === 'administrative' ? [{ name: "Carrito", icon: ShoppingCart, color: "#4B5563", href: "/cart" }] : []),
     { name: "Pedidos", icon: ListOrdered, color: "#4B5563", href: "/order" },
     ...(role === 'administrative' ? [{ name: "Usuarios", icon: User, color: "#4B5563", href: "/createuser" }] : []),
-    { name: "Cerrar sesión", icon: LogOut, color: "red", href: "/login", onClick: () => handleLogout() }
+    { name: "Cerrar sesión", icon: LogOut, color: "#4B5563", href: "/login", onClick: () => handleLogout() }
   ];
 
   const handleResize = () => {

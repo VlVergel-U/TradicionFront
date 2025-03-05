@@ -38,8 +38,6 @@ export const useAuthStore = create((set) => ({
 			localStorage.setItem('role', response.data.role);
 
 
-			clientAxios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
 			set({
 				isAuthenticated: true,
 				user: response.data.user,

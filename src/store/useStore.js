@@ -184,17 +184,12 @@ export const useStore = create((set, get) => ({
   sendOrder: async (emailUser, subtotalAllProducts, products) => {
     try {
       set({ isLoading: true, error: null });
-      const token = localStorage.getItem("token");
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      };
+
       const response = await clientAxios.post(`/tradicion/order`, {
         emailUser: emailUser,
         subtotalAllProducts: parseFloat(subtotalAllProducts),
         products: products,
-      },config);
+      });
 
       console.log("Orden enviada:", response.data);
       set({ loading: false });

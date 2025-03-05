@@ -20,19 +20,14 @@ const Order = () => {
         console.error("Token no encontrado");
         return;
       }
-  
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      };
+
   
       const body = {
         orderId: orderId,
         status: status,
       };
   
-      const response = await clientAxios.put("/tradicion/orderChangeStatus", body, config);
+      const response = await clientAxios.put("/tradicion/orderChangeStatus", body);
   
       if (response.data.success) {
         setOrders((prevOrders) =>
@@ -57,13 +52,8 @@ const Order = () => {
         console.error("Token no encontrado");
         return;
       }
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      };
       
-      const response = await clientAxios.get("/tradicion/order", config);
+      const response = await clientAxios.get("/tradicion/order");
 
       if (response.data.success) {
         setOrders(response.data.orders);
@@ -77,17 +67,12 @@ const Order = () => {
   };
 
   const getOrder = async () => {
+    
     setLoading(true);
   
     try {
      
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      };
-  
-      const response = await clientAxios.get(`/tradicion/orderUnique/`, config);
+      const response = await clientAxios.get(`/tradicion/orderUnique/`);
   
       if (response.data.success) {
         setOrders(response.data.orders);
@@ -133,7 +118,7 @@ const Order = () => {
                 {orders.map((order) => (
                   <div
                     key={order.id}
-                    className="rounded-lg p-4 shadow-lg flex justify-between items-center"
+                    className="rounded-lg p-4 shadow-md flex justify-between items-center"
                   >
                     <div>
                       <h2 className="text-lg font-semibold">

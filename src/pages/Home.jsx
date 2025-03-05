@@ -35,9 +35,9 @@ const Home = () => {
         </div>
       </div>
 
-            <div className="max-w-2xl mx-auto p-6 text-center mt-10">
+            <div className="max-w-7xl mx-auto p-4 text-center mt-10">
         <h2 className="text-2xl sm:text-3xl font-bona-nova-bold text-[#3D0F09] mb-4">Sobre Nosotros</h2>
-        <p className="text-lg sm:text-lg text-gray-700 font-bona-nova-regular">
+        <p className="text-lg sm:text-lg text-gray-700 font-bona-nova-regular text-justify">
           En <strong>Tradición</strong>, cada visita es una experiencia única que celebra la riqueza de nuestra cultura gastronómica. 
           Nuestro menú está cuidadosamente elaborado con ingredientes frescos y de alta calidad, 
           ofreciendo una fusión de sabores que rinden homenaje a nuestras raíces. 
@@ -51,7 +51,7 @@ const Home = () => {
         <img 
           src="https://images.unsplash.com/photo-1586011066531-f3a64f20d51d?q=80&w=2042&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
           alt="image"
-          className="w-full sm:w-1/2 h-auto object-cover rounded-lg shadow-lg"
+          className="w-full sm:w-1/2 lg:w-3xl h-auto object-cover rounded-lg shadow-lg"
         />
         <div className="bg-[#3D0F09] h-40 sm:h-48 w-full sm:w-1/3 flex items-center justify-center mt-8 sm:mt-0 sm:-ml-16">
           <p className="text-white p-4 text-sm sm:text-base font-bona-nova-regular text-center">

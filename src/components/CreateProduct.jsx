@@ -6,11 +6,12 @@ import useStore from "../store/useStore";
 import { Loader } from "lucide-react";
 
 const CreateProductModal = ({ isOpen, onClose, productToEdit}) => {
+
     const { createProduct, isLoading, error, updateProduct } = useStore();
     const [name, setName] = useState(productToEdit ? productToEdit.name : "");
     const [price, setPrice] = useState(productToEdit ? productToEdit.price : "");
     const [description, setDescription] = useState(productToEdit ? productToEdit.description : "");
-    const [category, setCategory] = useState(productToEdit ? productToEdit.category : "");
+    const [category, setCategory] = useState(productToEdit ? productToEdit.category.name : "");
     const [img, setImg] = useState(productToEdit ? productToEdit.img : "");
     const [stock, setStock] = useState(productToEdit ? productToEdit.stock.toString() : "1");
     const [errors, setErrors] = useState({});
@@ -110,7 +111,7 @@ const CreateProductModal = ({ isOpen, onClose, productToEdit}) => {
                   name="category"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full p-2 border rounded bg-white"
+                  className="w-full p-2 border rounded bg-white cursor-pointer"
                 >
                   <option value="">Selecciona una categoría</option>
                   <option value="cold drinks">Bebidas frías</option>
@@ -118,8 +119,11 @@ const CreateProductModal = ({ isOpen, onClose, productToEdit}) => {
                   <option value="salty food">Comida salada</option>
                   <option value="sweet food">Comida dulce</option>
                   <option value="desserts">Postres</option>
+
                 </select>
+
                 {errors.category && <p className="text-red-500 text-sm">{errors.category}</p>}
+
               </div>
   
               <div>
@@ -140,7 +144,7 @@ const CreateProductModal = ({ isOpen, onClose, productToEdit}) => {
                   name="stock"
                   value={stock}
                   onChange={(e) => setStock(e.target.value)}
-                  className="w-full p-2 border rounded bg-white"
+                  className="w-full p-2 border rounded bg-white cursor-pointer"
                 >
                   <option value="1">Disponible</option>
                   <option value="0">No disponible</option>
@@ -151,7 +155,7 @@ const CreateProductModal = ({ isOpen, onClose, productToEdit}) => {
               <button
                 disabled={isLoading}
                 type="submit"
-                className="w-full bg-amber-500 text-white py-2 rounded-lg hover:bg-amber-700 transition"
+                className="w-full bg-amber-700 text-white py-2 rounded-lg hover:bg-amber-800 transition cursor-pointer"
               >
                 {isLoading ? (
                   <Loader className='w-6 h-6 animate-spin mx-auto' />
