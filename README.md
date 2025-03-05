@@ -34,3 +34,51 @@ El proyecto está desplegado y disponible en la siguiente dirección: [Acceder a
 - **Exploración de productos** y detalles de cada uno.
 - **Gestor de pedidos**, permitiendo a los clientes seleccionar productos y realizar pedidos.
 - **Exportación de pedidos en PDF**.
+
+
+## Instalación y Configuración
+
+### Requisitos previos
+- [Node.js](https://nodejs.org/) (versión recomendada: 16 o superior)
+- [Git](https://git-scm.com/)
+
+### Pasos para la instalación
+
+1. Clona este repositorio en tu máquina local:
+   ```bash
+   git clone https://github.com/VlVergel-U/TradicionFront.git
+   ```
+2. Accede al directorio del proyecto:
+   ```bash
+   cd TradicionFront
+   ```
+3. Instala las dependencias del proyecto:
+   ```bash
+   npm install
+   ```
+
+### Configuración de Variables de Entorno
+
+Para que la aplicación funcione correctamente, debes configurar la URL del backend. Crea un archivo `.env` en la raíz del proyecto y agrega la siguiente variable:
+
+```env
+VITE_BACKEND_URL=http://localhost:5000
+```
+
+
+### Ejecución del Proyecto
+
+Una vez configuradas las dependencias y las variables de entorno, puedes ejecutar la aplicación en modo desarrollo con el siguiente comando:
+
+```bash
+npm run dev
+```
+
+Esto iniciará un servidor local y podrás acceder a la aplicación en `http://localhost:5173/` (o el puerto que indique la consola).
+
+---
+
+
+
+
+
