@@ -119,7 +119,7 @@ const handleDeleteProduct = async (event, id) => {
   return (
     <>
     <Header></Header>
-    <div className="flex h-screen">
+    <div className="flex h-screen font-bona-nova-regular">
       <Sidebar></Sidebar>
     <div className="flex-1 p-14 z-10 overflow-y-auto h-screen" id="Content">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
@@ -228,12 +228,6 @@ const handleDeleteProduct = async (event, id) => {
       {loading && (
         <p className="text-gray-400 text-center mt-4">
           Cargando más productos...
-        </p>
-      )}
-
-      {!hasMore && (
-        <p className="text-gray-400 text-center mt-4">
-          No hay más productos por mostrar
         </p>
       )}
 

@@ -47,7 +47,7 @@ const CreateUser = () => {
   return (
     <>
 <Header></Header>
-    <div className="flex h-screen">
+    <div className="flex h-screen font-bona-nova-regular">
       <Sidebar></Sidebar>
   <div className="bg-white rounded-lg max-w-md z-10 min-h-[400px] w-auto p-10">
     

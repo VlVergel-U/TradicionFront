@@ -35,8 +35,8 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="p-12 text-center mt-10">
-        <h2 className="text-1xl sm:text-3xl font-bona-nova-bold text-[#3D0F09] mb-4">Sobre Nosotros</h2>
+            <div className="max-w-2xl mx-auto p-6 text-center mt-10">
+        <h2 className="text-2xl sm:text-3xl font-bona-nova-bold text-[#3D0F09] mb-4">Sobre Nosotros</h2>
         <p className="text-lg sm:text-lg text-gray-700 font-bona-nova-regular">
           En <strong>Tradición</strong>, cada visita es una experiencia única que celebra la riqueza de nuestra cultura gastronómica. 
           Nuestro menú está cuidadosamente elaborado con ingredientes frescos y de alta calidad, 

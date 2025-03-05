@@ -114,7 +114,7 @@ const Order = () => {
   return (
     <>
       <Header />
-      <div className="flex h-screen">
+      <div className="flex h-screen font-bona-nova-regular">
         <Sidebar />
         <div className="flex flex-col flex-1 min-h-screen" id="Content">
           <div className="p-12 z-10 overflow-y-auto flex-1">

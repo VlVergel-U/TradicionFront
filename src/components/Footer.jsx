@@ -1,8 +1,7 @@
 const Footer = () => {
   return (
-    <footer className="bg-[#3D0F09] text-white p-6">
+    <footer className="bg-[#3D0F09] text-white p-6 font-bona-nova-regular" >
       <div className="max-w-screen-xl mx-auto text-center">
-        {/* Información de derechos */}
         <p className="font-inlander text-sm">
           © 2025 TRADICION. Todos los derechos reservados.
         </p>

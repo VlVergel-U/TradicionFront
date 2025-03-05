@@ -18,7 +18,7 @@ const Header = () => {
           <li>
             <Link
               to="/"
-              className={`link hover:text-gray-300 ml-12 ${location.pathname === '/' ? 'text-gray-300 font-bold' : ''}`}
+              className={`link hover:text-gray-300 ml-12 font-bona-nova-regular ${location.pathname === '/' ? 'text-gray-300 font-bold' : ''}`}
             >
               Inicio
             </Link>
@@ -26,7 +26,7 @@ const Header = () => {
           <li>
             <Link
               to="/menu"
-              className={`link hover:text-gray-300 ${location.pathname === '/menu' ? 'text-gray-300 font-bold' : ''}`}
+              className={`link hover:text-gray-300 font-bona-nova-regular ${location.pathname === '/menu' ? 'text-gray-300 font-bold' : ''}`}
             >
               Menú digital
             </Link>
@@ -34,7 +34,7 @@ const Header = () => {
           <li>
             <Link
               to="/work"
-              className={`link hover:text-gray-300 ${location.pathname === '/work' ? 'text-gray-300 font-bold' : ''}`}
+              className={`link hover:text-gray-300 font-bona-nova-regular${location.pathname === '/work' ? 'text-gray-300 font-bold' : ''}`}
             >
               Trabaja aquí
             </Link>
